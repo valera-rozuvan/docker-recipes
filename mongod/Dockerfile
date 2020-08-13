@@ -1,4 +1,5 @@
-from ubuntu
+from debian
+
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y gnupg2 wget tzdata
 RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.0.asc | apt-key add -
@@ -6,18 +7,20 @@ RUN echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-
 RUN apt-get update
 RUN apt-get install -y mongodb-org
 
+RUN mkdir -p /home/mongodb
+RUN chown -R mongodb:mongodb /home/mongodb
+
 RUN mkdir -p /data/db
+RUN mkdir -p /data/log
 
-COPY bootstrap.sh /data
-RUN chmod u+x /data/bootstrap.sh
+COPY scripts/ /data/scripts
+COPY config/ /data/config
+RUN chmod u+x /data/scripts/*.sh
 
-COPY migration.sh /data
-RUN chmod u+x /data/migration.sh
+RUN chown -R mongodb:mongodb /data
 
-COPY create-admin.js /data
-COPY create-user.js /data
-
+USER mongodb
 WORKDIR /data
 
 EXPOSE 27017
-ENTRYPOINT ["/bin/bash", "/data/bootstrap.sh"]
+ENTRYPOINT ["/bin/bash", "/data/scripts/bootstrap.sh"]
