@@ -15,7 +15,7 @@ RUN mkdir -p /data/log
 
 COPY scripts/ /data/scripts
 COPY config/ /data/config
-RUN chmod u+x /data/scripts/*.sh
+RUN chmod u+x /data/scripts/bash/*.sh
 
 RUN chown -R mongodb:mongodb /data
 
@@ -23,4 +23,4 @@ USER mongodb
 WORKDIR /data
 
 EXPOSE 27017
-ENTRYPOINT ["/bin/bash", "/data/scripts/bootstrap.sh"]
+ENTRYPOINT ["/bin/bash", "/data/scripts/bash/bootstrap.sh"]
