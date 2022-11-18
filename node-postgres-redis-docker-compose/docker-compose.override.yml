@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  api:
+    env_file: ./configs/api.env
+    volumes:
+      - ./api/src:/home/app/src
+  worker:
+    env_file: ./configs/worker.env
+    volumes:
+      - ./worker/src:/home/app/src
+  postgres:
+    env_file: ./configs/pg.env
+  pgadmin:
+    env_file: ./configs/pgadmin.env

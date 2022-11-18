@@ -1,0 +1,43 @@
+{
+  "name": "worker",
+  "version": "0.0.1",
+  "description": "bullmq worker to be used with the API",
+  "engines": {
+    "node": ">= 12.0.0",
+    "npm": ">= 6.0.0"
+  },
+  "engineStrict": true,
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently -k \"npm run build:watch\" \"npm run start:dev\"",
+    "start": "node dist/index.js",
+    "start:dev": "nodemon --inspect=0.0.0.0:9230 dist/index.js",
+    "build": "tsc",
+    "build:watch": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valera-rozuvan/node-postgres-redis-docker-compose.git"
+  },
+  "keywords": [],
+  "author": "Valera Rozuvan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/valera-rozuvan/node-postgres-redis-docker-compose/issues"
+  },
+  "homepage": "https://github.com/valera-rozuvan/node-postgres-redis-docker-compose#readme",
+  "dependencies": {
+    "@types/node": "^12.12.56",
+    "@types/pg": "^7.14.4",
+    "typescript": "^4.0.2",
+    "bullmq": "^1.9.0",
+    "sequelize": "^6.3.5",
+    "pg": "^8.3.3",
+    "pg-hstore": "^2.3.3"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.4"
+  }
+}
