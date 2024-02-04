@@ -2,9 +2,41 @@
 
 docker postgres scripts
 
-```
- Below are the `docker build` options used in the scripts, and their explanation.
+## running
 
+To start up a Postgres instance:
+
+```shell
+./postgres.sh
+```
+
+Wait for everything to start. When you will see something like this:
+
+```text
+PostgreSQL init process complete; ready for start up.
+
+2024-02-04 20:37:41.552 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2024-02-04 20:37:41.552 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2024-02-04 20:37:41.556 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2024-02-04 20:37:41.581 UTC [50] LOG:  database system was shut down at 2024-02-04 20:37:41 UTC
+2024-02-04 20:37:41.588 UTC [1] LOG:  database system is ready to accept connections
+```
+
+you know that the instance is ready.
+
+To connect to the DB via `psql`, run in another terminal window:
+
+```shell
+./psql.sh "postgres://db_user:user_pass@localhost/my_db"
+```
+
+NOTE: The username and password come from the file `./sql/init.sql`. This script is used when initializing the Postgres instance.
+
+## for reference
+
+Below are the `docker build` options used in the scripts, and their explanation.
+
+```text
  docker build [OPTIONS] PATH | URL | -
 
  -t
@@ -14,11 +46,11 @@ docker postgres scripts
  -f
  --file
    Name of the Dockerfile (Default is ‘PATH/Dockerfile’).
+```
 
+Below are the `docker run` options used in the scripts, and their explanation.
 
-
- Below are the `docker run` options used in the scripts, and their explanation.
-
+```text
  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 
  -t
@@ -48,11 +80,11 @@ docker postgres scripts
  -v
  --volume
    Bind mount a volume.
+```
 
+Below are `pg_dump` options used in the scripts, and their explanation.
 
-
- Below are `pg_dump` options used in the scripts, and their explanation.
-
+```text
  -h host
  --host=host
    Specifies the host name of the machine on which the server is running. If the value begins with
